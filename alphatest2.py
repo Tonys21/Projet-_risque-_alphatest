@@ -203,12 +203,13 @@ def main():
             _coordX = 962 + 35 * X_coordX
             _coordY = 80 + 54 * X_coordY
 
+
             # définition du X qui change de couleur en fonction du résultat de la p-value
-            if p_value[1] > 0.10:
+            if float(p_value[1]) > 0.10:
                 __text_x = list_de_x.render(f"x", True, (0,255,0))     # Vert
-            if 0.05 < p_value[1] <= 0.10:
+            if 0.05 < float(p_value[1]) <= 0.10:
                 __text_x = list_de_x.render(f"x", True, (255,128,0))   # Orange
-            if p_value[1] <= 0.05:
+            if float(p_value[1]) <= 0.05:
                 __text_x = list_de_x.render(f"x", True, (255,0,0))     # Rouge
             screen.blit(__text_x, (_coordX, _coordY))
 
