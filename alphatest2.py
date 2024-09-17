@@ -25,8 +25,8 @@ RECT_WIDTH, RECT_HEIGHT = 15, 15                # modulo servant à créer les l
                                                 # 30 permet d'avoir 30 et 22 carreaux
 
 # définition de la taille des rectangles:
-rect_largeur = 3
-rect_hauteur = 3
+rect_largeur = 5
+rect_hauteur = 5
 
 # extraction du modulo pour la largeur et la hauteur
 RECTANGLE_WIDTH, RECTANGLE_HEIGHT = 0,0
@@ -142,6 +142,13 @@ def perform_chi2_test(counts1, counts2):
     except ValueError:
         return None
 
+# définition de la fonction pause
+def pauseMenu(self):
+    if self.pause == True:
+        self.pause = False
+    elif self.pause == False:
+        self.pause = True
+
 
 # Boucle principale
 def main():
@@ -154,6 +161,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
+ #               if event.key == pygame.K_p:
+ #                   pauseMenu()
                 if event.key == pygame.K_SPACE:
                     p_value_list = []
                     grid = generate_grid(num_colors)
@@ -187,13 +196,13 @@ def main():
             text = pvalue_text.render(f"p-value: {p_value:.4f}", True, (255, 255, 255))
         else:
             text = pvalue_text.render("p-value: N/A", True, (255, 255, 255))
-        screen.blit(text, (1050, 20))
+        screen.blit(text, (1050, 25))
 
 
         # écriture d'une croix avec des couleurs différentes en fonction des p-values calculées
         for p_value in enumerate(p_value_list_100der):
             # initialisation du Font pygame
-            list_de_x = pygame.font.Font(None, 24)
+            list_de_x = pygame.font.Font(None, 54)
             p_index = p_value[0]
 
             # définition des coordonnées relatives (x,y) du X:
@@ -201,7 +210,7 @@ def main():
             X_coordY = p_index // 10        # nb de division par le modulo pour définir la hauteur
 
             _coordX = 962 + 35 * X_coordX
-            _coordY = 80 + 54 * X_coordY
+            _coordY = 75 + 54 * X_coordY
 
 
             # définition du X qui change de couleur en fonction du résultat de la p-value
@@ -223,7 +232,7 @@ def main():
         _coordX_vert = 950
         _coordX_orange = 1100
         _coordX_rouge = 1250
-        _coordY_counts = 630
+        _coordY_counts = 625
 
         # calcul des counts:
         _count_vert = sum(p_value_list > 0.10)
